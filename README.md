@@ -1,6 +1,12 @@
 # Stellar Toolkit 🌟
 
+[![CI Status](https://github.com/HyperDevTools/stellar-toolkit/workflows/CI/badge.svg)](https://github.com/HyperDevTools/stellar-toolkit/actions)
+[![Version](https://img.shields.io/github/v/release/HyperDevTools/stellar-toolkit)](https://github.com/HyperDevTools/stellar-toolkit/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A comprehensive TypeScript/JavaScript utility library that simplifies common Stellar blockchain operations. Built for developers who want clean, tested, and production-ready helpers for Stellar development.
+
+**Current Version:** v0.1.0
 
 ## 🎯 Overview
 
@@ -16,10 +22,11 @@ Stellar Toolkit provides high-level abstractions over the Stellar SDK, making it
 - **Account Management**: Simplified account creation, funding, and balance checking
 - **Payment Operations**: Easy-to-use payment and path payment functions
 - **Asset Utilities**: Create, manage, and query custom assets
-- **Transaction Builders**: Fluent API for building complex transactions
-- **Error Handling**: Comprehensive error handling with meaningful messages
 - **Network Helpers**: Automatic network detection and configuration
+- **Error Handling**: Comprehensive error handling with meaningful messages
 - **Type-Safe**: Full TypeScript support with detailed type definitions
+- **Well Tested**: Comprehensive test suite with example tests
+- **CI/CD**: Automated testing and linting on every commit
 
 ## 📦 Installation
 
@@ -42,8 +49,8 @@ const toolkit = new StellarToolkit({
 });
 
 // Create a new account
-const account = await toolkit.createAccount();
-console.log('New account:', account.publicKey);
+const keypair = toolkit.generateKeypair();
+console.log('New account:', keypair.publicKey);
 
 // Send a payment
 await toolkit.sendPayment({
@@ -123,31 +130,44 @@ await toolkit.addTrustline({
 });
 ```
 
-### Transaction Utilities
+## 🧪 Development
 
-```typescript
-// Build a transaction with multiple operations
-const txBuilder = toolkit.transaction(sourceAccount);
-
-const tx = await txBuilder
-  .addPayment(destination1, '10')
-  .addPayment(destination2, '20')
-  .setTimeout(180)
-  .build();
-
-// Submit transaction
-const result = await toolkit.submitTransaction(tx, sourceSecret);
-```
-
-## 🧪 Testing
+### Build Scripts
 
 ```bash
-npm test
+# Build the project
+./scripts/build.sh
+
+# Run tests
+./scripts/test.sh
+
+# Run linter
+./scripts/lint.sh
+```
+
+Or using npm:
+
+```bash
+npm test          # Run test suite
+npm run build     # Build for production
+npm run lint      # Check code style
+```
+
+### Testing
+
+The project includes a comprehensive test suite:
+
+```bash
+npm test                  # Run all tests
+npm test -- --watch       # Run tests in watch mode
+npm test -- --coverage    # Run with coverage report
 ```
 
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+**Good First Issues:** Check out issues labeled [`good-first-issue`](https://github.com/HyperDevTools/stellar-toolkit/labels/good-first-issue)
 
 ### Development Setup
 
@@ -164,21 +184,39 @@ npm test
 
 # Build the project
 npm run build
-
-# Run linter
-npm run lint
 ```
+
+### CI/CD
+
+All pull requests are automatically tested with:
+- ✅ Unit tests (Jest)
+- ✅ ESLint checks
+- ✅ TypeScript compilation
+- ✅ Code formatting (Prettier)
+- ✅ Multi-version testing (Node 18.x, 20.x)
+
+See [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for details.
 
 ## 📋 Roadmap
 
+See [CHANGELOG.md](CHANGELOG.md) for version history.
+
+**Planned Features:**
 - [ ] Multi-signature account support
+- [ ] Path payment strict send operations
 - [ ] Claimable balance helpers
 - [ ] Liquidity pool operations
 - [ ] DEX trading utilities
 - [ ] Fee bump transaction helpers
 - [ ] Batch operation support
 - [ ] Enhanced error recovery
-- [ ] Performance optimizations
+
+## 📚 API Documentation
+
+Detailed API documentation available in [`docs/api/`](docs/api/):
+- [Account Manager API](docs/api/account-manager.md)
+- Payment Manager API *(coming soon)*
+- Trustline Manager API *(coming soon)*
 
 ## 📄 License
 
@@ -193,17 +231,28 @@ Built with:
 
 ## 🔗 Links
 
-- [Documentation](https://hyperdevtools.github.io/stellar-toolkit)
-- [Stellar Developers](https://developers.stellar.org/)
-- [Stellar Quest](https://quest.stellar.org/)
-- [Issue Tracker](https://github.com/HyperDevTools/stellar-toolkit/issues)
+- **[Release Notes](https://github.com/HyperDevTools/stellar-toolkit/releases)** - v0.1.0
+- **[API Documentation](docs/api/)** - Complete API reference
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
+- **[Changelog](CHANGELOG.md)** - Version history
+- **[Issue Templates](.github/ISSUE_TEMPLATE/)** - Report bugs or request features
+- [Stellar Developers](https://developers.stellar.org/) - Official Stellar docs
+- [Stellar Quest](https://quest.stellar.org/) - Learn Stellar development
 
 ## 💬 Support
 
-- Open an issue for bug reports or feature requests
-- Join our community discussions
-- Contribute to the codebase
+- **Issues:** [Report bugs or request features](https://github.com/HyperDevTools/stellar-toolkit/issues)
+- **Discussions:** Join community discussions on GitHub
+- **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 🌟 Show Your Support
+
+If you find this project useful, please:
+- ⭐ Star the repository
+- 🐛 Report bugs and suggest features
+- 🤝 Contribute code or documentation
+- 📢 Share with other developers
 
 ---
 
-Made with ❤️ by HyperDevTools
+**Part of the [HyperDevTools](https://github.com/HyperDevTools) organization** • Building developer tools for the Stellar ecosystem
