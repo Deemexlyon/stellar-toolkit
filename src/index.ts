@@ -1,5 +1,12 @@
 import { Server } from 'stellar-sdk';
-import { ToolkitConfig, AccountInfo, PaymentOptions, PathPaymentOptions, TrustlineOptions, Balance } from './types';
+import {
+  ToolkitConfig,
+  AccountInfo,
+  PaymentOptions,
+  PathPaymentOptions,
+  TrustlineOptions,
+  Balance,
+} from './types';
 import { createServer, getNetworkPassphrase } from './utils/network';
 import { AccountManager } from './core/account';
 import { PaymentManager } from './core/payment';

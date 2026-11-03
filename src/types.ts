@@ -1,5 +1,3 @@
-import { Asset } from 'stellar-sdk';
-
 export type NetworkType = 'mainnet' | 'testnet';
 
 export interface ToolkitConfig {
