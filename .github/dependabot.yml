@@ -1,0 +1,40 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Code-Kaybee"
+    assignees:
+      - "Code-Kaybee"
+    labels:
+      - "dependencies"
+      - "security"
+    # Automatically merge minor and patch updates
+    # (you can enable this later when comfortable)
+    # auto-merge: true
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    # Group updates to reduce PR noise
+    groups:
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+  
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"

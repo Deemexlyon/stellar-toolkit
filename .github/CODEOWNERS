@@ -1,0 +1,25 @@
+# Code Owners for Stellar Toolkit
+# These owners will be requested for review when someone opens a pull request.
+
+# Default owners for everything in the repo
+* @Code-Kaybee
+
+# Critical configuration files
+package.json @Code-Kaybee
+package-lock.json @Code-Kaybee
+tsconfig.json @Code-Kaybee
+
+# GitHub workflows and security
+.github/workflows/* @Code-Kaybee
+.github/CODEOWNERS @Code-Kaybee
+.github/dependabot.yml @Code-Kaybee
+
+# Build and deployment scripts
+scripts/* @Code-Kaybee
+
+# Security-sensitive files
+SECURITY.md @Code-Kaybee
+
+# Core source code (require review)
+src/core/* @Code-Kaybee
+src/index.ts @Code-Kaybee
