@@ -127,13 +127,13 @@ describe('StellarToolkit - Liquidity Pool Operations', () => {
     { field: 'totalShares', reserveA: 10, reserveB: 10, totalShares: 0 },
     { field: 'totalShares', reserveA: 10, reserveB: 10, totalShares: NaN },
   ])('rejects invalid $field', ({ field, reserveA, reserveB, totalShares }) => {
-    expect(() => toolkit.calculateLpAmount(1, 1, reserveA, reserveB, totalShares)).toThrow(
-      field,
-    );
+    expect(() => toolkit.calculateLpAmount(1, 1, reserveA, reserveB, totalShares)).toThrow(field);
   });
 
   it('rejects incomplete optional reserve inputs', () => {
-    expect(() => toolkit.calculateLpAmount(1, 1, 10)).toThrow('reserveA, reserveB, and totalShares');
+    expect(() => toolkit.calculateLpAmount(1, 1, 10)).toThrow(
+      'reserveA, reserveB, and totalShares',
+    );
   });
 
   it.each([
@@ -164,22 +164,25 @@ describe('StellarToolkit - Liquidity Pool Operations', () => {
     { field: 'minPrice', spotPrice: 4, minPrice: 'NaN', maxPrice: '4.5' },
     { field: 'maxPrice', spotPrice: 4, minPrice: '3.5', maxPrice: 'Infinity' },
     { field: 'minPrice', spotPrice: 4, minPrice: '5', maxPrice: '4.5' },
-  ])('rejects invalid $field without submitting', async ({ field, spotPrice, minPrice, maxPrice }) => {
-    const user = Keypair.random();
-    const server = (toolkit as unknown as { server: { submitTransaction: jest.Mock } }).server;
+  ])(
+    'rejects invalid $field without submitting',
+    async ({ field, spotPrice, minPrice, maxPrice }) => {
+      const user = Keypair.random();
+      const server = (toolkit as unknown as { server: { submitTransaction: jest.Mock } }).server;
 
-    await expect(
-      toolkit.depositLiquidity({
-        accountSecret: user.secret(),
-        assetA: 'native',
-        assetB: usdc,
-        maxAmountA: '200',
-        maxAmountB: '50',
-        minPrice,
-        maxPrice,
-        spotPrice,
-      }),
-    ).rejects.toThrow(field);
-    expect(server.submitTransaction).not.toHaveBeenCalled();
-  });
+      await expect(
+        toolkit.depositLiquidity({
+          accountSecret: user.secret(),
+          assetA: 'native',
+          assetB: usdc,
+          maxAmountA: '200',
+          maxAmountB: '50',
+          minPrice,
+          maxPrice,
+          spotPrice,
+        }),
+      ).rejects.toThrow(field);
+      expect(server.submitTransaction).not.toHaveBeenCalled();
+    },
+  );
 });

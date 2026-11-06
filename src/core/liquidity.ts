@@ -55,9 +55,7 @@ export class LiquidityPoolManager {
       throw new Error('amountB must be a finite positive number');
     }
 
-    const hasReserveInputs = [reserveA, reserveB, totalShares].some(
-      (value) => value !== undefined,
-    );
+    const hasReserveInputs = [reserveA, reserveB, totalShares].some((value) => value !== undefined);
     const hasAllReserveInputs = [reserveA, reserveB, totalShares].every(
       (value) => value !== undefined,
     );
